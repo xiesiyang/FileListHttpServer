@@ -10,3 +10,20 @@
 ## 说明
 
 暂时还不支持文件查看或者下载
+
+## 运行
+
+运行命令
+```
+mvn package
+java -jar ./target/file_ls_http_server-1.0-SNAPSHOT.jar
+```
+当控制台出现
+```$xslt
+it is time to open browser 
+```
+说明程序启动,可以访问路径  
+
+[http://localhost:9099](http://localhost:9099)
+
+查看效果
