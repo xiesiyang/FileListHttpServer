@@ -35,9 +35,14 @@ public class FileListHttpServerHandler extends ChannelInboundHandlerAdapter {
             boolean keepAlive = HttpUtil.isKeepAlive(request);
 
 
-            String uri = URLDecoder.decode(request.uri(),"utf-8");
+            String uri = request.uri();
+            String path = URLDecoder.decode(uri,"utf-8");
+            if(path.equals("/favicon.ico")){
+                return;
+            }
+            System.out.println(path);
 
-            ByteBuf byteBuf = Unpooled.wrappedBuffer(FileListUtil.fileListByPath(uri).getBytes());
+            ByteBuf byteBuf = Unpooled.wrappedBuffer(FileListUtil.fileListByPath(path).getBytes());
 
             DefaultFullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, byteBuf);
             response.headers().set(CONTENT_TYPE,"text/html;charset=utf-8");
