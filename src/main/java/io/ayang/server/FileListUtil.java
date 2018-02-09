@@ -1,14 +1,18 @@
 package io.ayang.server;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileListUtil {
 
-    public static void main(String[] args) {
-        System.out.println(fileListToHtml(readPath("/")));
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String s = "/mine/%E5%AD%A6%E4%B9%A0/";
+        System.out.println(URLDecoder.decode(s,"utf-8"));
     }
 
     public static String fileListByPath(String path){

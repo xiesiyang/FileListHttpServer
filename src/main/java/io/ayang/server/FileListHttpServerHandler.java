@@ -8,6 +8,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.*;
 import io.netty.util.AsciiString;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.*;
 
@@ -31,7 +34,9 @@ public class FileListHttpServerHandler extends ChannelInboundHandlerAdapter {
 
             boolean keepAlive = HttpUtil.isKeepAlive(request);
 
-            String uri = request.uri();
+
+            String uri = URLDecoder.decode(request.uri(),"utf-8");
+
             ByteBuf byteBuf = Unpooled.wrappedBuffer(FileListUtil.fileListByPath(uri).getBytes());
 
             DefaultFullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, byteBuf);
